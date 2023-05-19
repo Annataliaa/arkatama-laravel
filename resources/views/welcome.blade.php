@@ -5,9 +5,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
-    <title>Laravel</title>
+    <title>Laravel-Natta</title>
 </head>
 <body>
+    <center>
+        <h1>Tugas Pertemuan 22</h1>
+        <h2>Menu Utama</h2>
+        <h3>Annatalia</h3>
+        <h3><p>Full Stack Web Development 2</p></h3>
+        <h3><p>4561436</p></h3>
     <div class="container">
         <table class="table mt-5">
             <thead>
@@ -42,7 +48,7 @@
                     <a href="" class="btn btn-warning">Edit</a>
                     <a href="" class="btn btn-danger">Delete</a>
                 </td>
-                <td><img src="/img/Vanya.jpg" alt="" width="100px"></td>
+                <td><img src="/img/Vanya.jpeg" alt="" width="100px"></td>
                 <td>Vanya Radjwa</td>
                 <td>VanyaJKT@gmail.com</td>
                 <td>08199965143</td>
