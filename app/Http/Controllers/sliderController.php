@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Slider;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\StoreSliderRequest;
+use App\Http\Requests\UpdateSliderRequest;
 
-class sliderController extends Controller
+class SliderController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,7 +18,7 @@ class sliderController extends Controller
     public function index()
     {
         $sliders = Slider::all();
-        return view ('slider.index', [
+        return view('sliders.index',[
             'sliders' => $sliders
         ]);
     }
@@ -26,33 +30,37 @@ class sliderController extends Controller
      */
     public function create()
     {
-        return view ('sliders.create');
+        return view('sliders.create');
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
+     * @param  \App\Http\Requests\StoreSliderRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, Slider $slider)
     {
-        $sliders = $request->validate([
-            'gambar' =>'file|image|max:3000'
+        $validasi = $request->validate([
+            'caption' => 'required',
+            'deskripsi' => 'required',
+            'gambar' => 'image|file|max:3000'
         ]);
+        
         if ($request->file('gambar')){
-            $validated['gambar'] = $reques->file('gambar')->store('gambar');
-        }
-        Slider::create($sliders);
+            $validasi['gambar'] = $request->file('gambar')->store('sliders');
+        };
+        $slider->create($validasi);
+        return redirect()->route('sliders.index');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(Slider $slider)
     {
         //
     }
@@ -60,34 +68,53 @@ class sliderController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  int  $id
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function edit($id)
+    public function edit(Slider $slider)
     {
-        //
+        return view('sliders.edit',[
+            'slider' => $slider
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \Illuminate\Http\Request  $request
-     * @param  int  $id
+     * @param  \App\Http\Requests\UpdateSliderRequest  $request
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request, Slider $slider)
     {
-        //
+        $validasi = $request->validate([
+            'gambar' => 'image|file|max:3000',
+            'caption' => 'required',
+            'deskripsi' => 'required'
+        ]);
+        
+        if ($request->file('gambar')){
+            if ($request->oldImage) {
+                Storage::delete($request->oldImage);
+            }
+            $validasi['gambar'] = $request->file('gambar')->store('sliders');
+        };
+        $slider->update($validasi);
+        return redirect()->route('sliders.index');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  \App\Models\Slider  $slider
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(Slider $slider)
     {
-        //
+        if ($slider->gambar){
+            Storage::delete($slider->gambar);
+        };
+        $slider->delete();
+        return redirect()->route('sliders.index');
     }
 }

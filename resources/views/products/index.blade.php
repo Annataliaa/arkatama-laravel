@@ -1,40 +1,53 @@
-@extends('layout.main')
+@extends('layouts.main')
 
-@section('maincontent')
-    <div class="container-fluid px-4">
-        <div class="card-header">
-            <h1 class="mt-4">List Products</h1>
-        </div>
+@section('content')
+    <h1>Data Produk</h1>
 
-        <a class="btn btn-primary mb-3" href="{{ route('listproducts.create') }}" role="button">Create New</a>
+    @php
+      $data = 'Data Produk di Gudang A';
+    @endphp
 
-        <div class="card mb-4">
-            <div class="card-body">
-                <table id="datatablesSimple">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Category</th>
-                            <th>Name</th>
-                            <th>Price</th>
-                            <th>Action</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($list_products as $products)
-                            <tr>
-                                <td>{{ $loop->iteration }}</td>
-                                <td>{{ $products['name'] }}</td>
-                                <td>
-                                    <a href="#" class="btn btn-warning">Edit</a>
-                                    <button class="btn btn-danger">Delete</button>
-                                </td>
-                            </tr>
-                        @endforeach
-                    </tbody>
-                </table>
-            </div>
+    <h5>Lokasi Barang : {{ $data }}</h5>
 
-        </div>
+    <a href="{{ url('/produk-create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
+
+    <div class="table-responsive">
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th scope="col">No.</th>
+                    <th scope="col">Nama Barang</th>
+                    <th scope="col" class="text-center">Gambar</th>
+                    <th scope="col">Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                @forelse ($products as $n)
+                    <tr class="">
+                        <td scope="row">{{ $loop->iteration }}.</td>
+                        <td>{{ $n->nama }}</td>
+                        <td class="text-center"><img style="height: 50px; width: 50px;" src="{{ asset('storage/gambar/' . $n->file) }}" alt=""></td>
+                        <td>-</td>
+                    </tr>
+                @empty
+                    <tr>
+                        <td class="text-center" colspan="3">Data Tidak Ada</td>
+                    </tr>
+                @endforelse
+            </tbody>
+        </table>
     </div>
+
+    <p>
+      Keterangan : <br>
+      <p class="fst-italic">
+        @if (count($products) == 1)
+            Saya Memiliki 1 Produk
+        @elseif (count($products) > 1)
+            Saya Memiliki banyak Produk
+        @else
+            Saya Tidak Memiliki Produk
+        @endif
+      </p>
+    </p>
 @endsection

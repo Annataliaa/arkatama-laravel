@@ -1,28 +1,26 @@
-@extends('layout.main')
-@section('maincontent')
-    <div class="container-fluid px-4">
-        <h1>Create List Product</h1>
-        <div class="card mb-4">
-            <div class="card-body">
-                <form action="{{ route('products.store') }}" method="POST">
-                    @csrf
-                    <div class="form-group">
-                        <label for="products" class="form-label">Categories</label>
-                        <input type="number" class="form-control" id="categories" placeholder="Enter Your categories"
-                            required>
-                    </div>
-                    <div class="form-group">
-                        <label for="name" class="form-label">Name</label>
-                        <input type="text" class="form-control" id="name" placeholder="Enter Your Name" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="price" class="form-label">Price</label>
-                        <input type="number" class="form-control" id="price" placeholder="Enter Your price" required>
-                    </div>
-                    <button type="submit" class="btn btn-primary">Submit</button>
-                    <button type="submit" class="btn btn-secondary">Cancel</button>
-                </form>
-            </div>
-        </div>
-    </div>
+@extends('layouts.main')
+
+@section('content')
+    <h1>Data Produk</h1>
+
+    <form action="/produk-store" method="post" enctype="multipart/form-data">
+      @csrf
+      <div class="mb-2">
+        <label for="">Nama</label>
+        <input type="text" name="nama" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label for="">Deskripsi</label>
+        <input type="text" name="deskripsi" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label for="">Harga</label>
+        <input type="number" name="harga" class="form-control">
+      </div>
+      <div class="mb-2">
+        <label for="">Gambar</label>
+        <input type="file" name="file" class="form-control">
+      </div>
+      <input type="submit" class="btn btn-primary" value="simpan">
+    </form>
 @endsection
