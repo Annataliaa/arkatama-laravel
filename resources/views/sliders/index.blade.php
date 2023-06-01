@@ -11,9 +11,9 @@
                                         <tr>
                                             <th>#</th>
                                             <th>Aksi</th>
+                                            <th>Gambar</th>
                                             <th>Caption</th>
                                             <th>Deskripsi</th>
-                                            <th>Gambar</th>
                                         </tr>
                                     </thead>
                                     <tbody>
@@ -30,9 +30,9 @@
                                                     <button class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Delete</button>
                                                 </form>
                                             </td>
+                                            <td><img src="{{ asset('storage/' . $slider->gambar )}}" alt="" width="400em"></td>
                                             <td>{{ $slider->caption }}</td>
                                             <td>{{ $slider->deskripsi }}</td>
-                                            <td><img src="{{ asset('storage/' . $slider->gambar )}}" alt="" width="200em"></td>
                                         </tr> 
                                     @endforeach
                                     </tbody>
