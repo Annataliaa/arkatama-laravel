@@ -1,53 +1,50 @@
 @extends('layouts.main')
-
 @section('content')
-    <h1>Data Produk</h1>
 
-    @php
-      $data = 'Data Produk di Gudang A';
-    @endphp
-
-    <h5>Lokasi Barang : {{ $data }}</h5>
-
-    <a href="{{ url('/produk-create') }}" class="btn btn-primary btn-sm">Tambah Data</a>
-
-    <div class="table-responsive">
-        <table class="table table-striped">
-            <thead>
-                <tr>
-                    <th scope="col">No.</th>
-                    <th scope="col">Nama Barang</th>
-                    <th scope="col" class="text-center">Gambar</th>
-                    <th scope="col">Aksi</th>
-                </tr>
-            </thead>
-            <tbody>
-                @forelse ($products as $n)
-                    <tr class="">
-                        <td scope="row">{{ $loop->iteration }}.</td>
-                        <td>{{ $n->nama }}</td>
-                        <td class="text-center"><img style="height: 50px; width: 50px;" src="{{ asset('storage/gambar/' . $n->file) }}" alt=""></td>
-                        <td>-</td>
-                    </tr>
-                @empty
-                    <tr>
-                        <td class="text-center" colspan="3">Data Tidak Ada</td>
-                    </tr>
-                @endforelse
-            </tbody>
-        </table>
-    </div>
-
-    <p>
-      Keterangan : <br>
-      <p class="fst-italic">
-        @if (count($products) == 1)
-            Saya Memiliki 1 Produk
-        @elseif (count($products) > 1)
-            Saya Memiliki banyak Produk
-        @else
-            Saya Tidak Memiliki Produk
-        @endif
-      </p>
-    </p>
+                    <div class="card mb-4 mt-3">
+                            <div class="card-header">
+                                <a href="{{ route('products.create') }}" class="btn btn-success">Tambah</a>
+                            </div>
+                            <div class="card-body">
+                                <table id="datatablesSimple">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Aksi</th>
+                                            <th>Gambar</th>
+                                            <th>Nama Produk</th>
+                                            <th>Deskripsi</th>
+                                            <th>Harga</th>
+                                            <th>Kategori</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach($products as $key => $product)
+                                        <tr>
+                                            <td>{{$key+1}}</td>
+                                            <td>
+                                                <a href="{{ route ('products.show', $product) }}" class="btn btn-success btn-xs">
+                                                    Detail
+                                                </a>
+                                                <a href="{{ route('products.edit', $product) }}" class="btn btn-warning btn-xs">
+                                                    Edit
+                                                </a>
+                                                <form class='d-inline' action="{{ route('products.destroy', $product) }}" method="post">
+                                                    @method('delete')
+                                                    @csrf
+                                                    <button class="btn btn-danger btn-xs" onclick="return confirm('Are you sure?')">Delete</button>
+                                                </form>
+                                            </td>
+                                            <td><img src="{{ asset('storage/' . $product->gambar )}}" class="img-fluid rounded-circle" width="100px"></td>
+                                            <td>{{ $product->nama }}</td>
+                                            <td>{{ $product->deskripsi }}</td>
+                                            <td>{{ $product->harga }}</td>
+                                            <td>{{ $product->categories->category_name }}</td>
+                                        </tr>
+                                        
+                                    @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
 @endsection

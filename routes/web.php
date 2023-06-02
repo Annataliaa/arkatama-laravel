@@ -24,6 +24,9 @@ Route::get('/login', [\App\Http\Controllers\LoginController::class, 'index'])->n
 Route::post('/login', [\App\Http\Controllers\LoginController::class, 'authenticate']);
 Route::get('/logout', [\App\Http\Controllers\LoginController::class, 'logout']);
 
+Route::resource('/categories', \App\Http\Controllers\CategoryController::class)->middleware('auth');
+
+Route::resource('/products', \App\Http\Controllers\ProductController::class)->middleware('auth');
 
 Route::resource('/roles', \App\Http\Controllers\RoleController::class)->middleware('auth');
 
@@ -31,9 +34,7 @@ Route::resource('/sliders', \App\Http\Controllers\SliderController::class)->midd
 
 Route::resource('/users', \App\Http\Controllers\UserController::class)->middleware('auth');
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/',[\App\Http\Controllers\LandingController::class, 'index']);
 
 Route::get('/landing', [\App\Http\Controllers\LandingController::class, 'index']);
 
