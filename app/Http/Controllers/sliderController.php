@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Slider;
+use App\Models\slider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use App\Http\Requests\StoreSliderRequest;
