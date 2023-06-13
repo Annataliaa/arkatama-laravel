@@ -16,7 +16,7 @@
       <div class="row justify-content-center pt-5">
         <div class="col-lg-5">
             <main class="form-registration">
-                <h1 class="h3 mb-3 fw-normal text-center">Please Register</h1>
+                <h1 style="font-family:cooper black" class="h3 mb-3 fw-normal text-center">Register Cupcake</h1>
                 <form action="/register" method="post">
                   @csrf
                     <div class="form-floating">
