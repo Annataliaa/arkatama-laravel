@@ -32,7 +32,7 @@
       @endif
 
         <main class="form-signin">
-            <h1 class="h3 mb-3 fw-normal text-center">Please login</h1>
+            <h1 style="font-family:cooper black" class="h3 mb-3 fw-normal text-center">login Cupcake</h1>
             <form action="/login" method="post">
               @csrf
               <div class="form-floating">
@@ -46,6 +46,7 @@
                 <input type="password" name="password" class="form-control" id="password" placeholder="Password">
                 <label for="password">Password</label>
               </div>
+              <br>
               <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
             </form>
             <small class="d-block text-center">
