@@ -14,6 +14,7 @@
                         <div class="sb-nav-link-icon"><i class="fas fa-image"></i></div>
                         Sliders
                     </a>
+                    @if(Auth::check() && Auth::user()->roles->role_name == 'admin')
                     <div class="sb-sidenav-menu-heading">MANAGEMENT</div>
                     <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseLayouts" aria-expanded="false" aria-controls="collapseLayouts">
                         <div class="sb-nav-link-icon"><i class="fas fa-columns"></i></div>
@@ -37,12 +38,12 @@
                             <a class="nav-link" href="{{ route('users.index') }}">Users</a>
                         </nav>
                     </div>
-
+                    @endif
                 </div>
             </div>
             <div class="sb-sidenav-footer">
                 <div class="small">Logged in as:</div>
-                Start Bootstrap
+                {{ Auth::user()->name }}
             </div>
         </nav>
     </div>
